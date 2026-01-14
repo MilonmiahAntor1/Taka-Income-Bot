@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taka Income</title>
+
+<style>
+body{
+  margin:0;
+  background:#f5f6fa;
+  font-family:Arial, sans-serif;
+  padding-bottom:90px;
+}
+
+/* HEADER */
+.header{
+  background:#fff;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.avatar{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#1e90ff;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  overflow:hidden;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.balance{
+  color:#555;
+  font-size:14px;
+}
+
+.username{
+  font-size:13px;
+  color:#888;
+}
+
+/* CARDS */
+.cards{
+  display:flex;
+  gap:10px;
+  padding:15px;
+}
+
+.card{
+  flex:1;
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+}
+
+.card h3{
+  margin:5px 0;
+  color:#1e90ff;
+}
+
+/* REF BOX */
+.ref-box{
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  margin:15px;
+}
+
+.ref-link{
+  border:2px dashed #1e90ff;
+  padding:10px;
+  border-radius:8px;
+  font-size:13px;
+  word-break:break-all;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:10px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:999px;
+  font-size:15px;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* COPY */
+.copy{
+  background:linear-gradient(90deg,#ff4fd8,#8f4bff);
+  animation: glow1 2s infinite alternate;
+}
+
+@keyframes glow1{
+  from{box-shadow:0 0 10px rgba(255,79,216,.6);}
+  to{box-shadow:0 0 30px rgba(143,75,255,1);}
+}
+
+/* SHARE */
+.share{
+  background:#2ecc71;
+  animation: glow2 2s infinite alternate;
+}
+
+@keyframes glow2{
+  from{box-shadow:0 0 10px rgba(46,204,113,.6);}
+  to{box-shadow:0 0 30px rgba(46,204,113,1);}
+}
+
+/* TG BUTTON */
+.tg-btn{
+  margin:10px 15px;
+  background:#fff;
+  border-radius:12px;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+  cursor:pointer;
+}
+
+.tg-left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:600;
+}
+
+.tg-icon{
+  width:26px;
+  height:26px;
+  background:#1e90ff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.tg-icon svg{
+  width:14px;
+  fill:#fff;
+}
+
+.tg-arrow{
+  font-size:18px;
+  color:#888;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="avatar" id="avatar">U</div>
+  <div>
+    <b id="fullname">User</b> ✔️<br>
+    <span class="username" id="tgUsername"></span><br>
+    <span class="balance">ব্যালেন্স: <b id="balance">৳0</b></span>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="cards">
+  <div class="card">Daily Ads<h3 id="ads">0 / 20</h3></div>
+  <div class="card">Total Referrals<h3 id="refs">0</h3></div>
+</div>
+
+<!-- REFERRAL -->
+<div class="ref-box">
+  <h3>Refer & Earn More!</h3>
+  <div class="ref-link" id="reflink"></div>
+  <button class="btn copy" onclick="copyLink()">✨ Copy Referral Link</button>
+  <button class="btn share" onclick="shareLink()">🚀 Share Now</button>
+</div>
+
+<!-- TELEGRAM -->
+<div class="tg-btn" onclick="joinTelegram()">
+  <div class="tg-left">
+    <div class="tg-icon">
+      <svg viewBox="0 0 24 24"><path d="M9.04 15.44 8.7 19.9c.48 0 .69-.21.94-.45l2.26-2.16 4.68 3.42c.86.48 1.48.23 1.7-.8l3.08-14.42c.28-1.31-.47-1.83-1.3-1.52L1.35 9.56c-1.28.5-1.26 1.21-.22 1.53l4.6 1.44z"/></svg>
+    </div>
+    Join on Telegram
+  </div>
+  <div class="tg-arrow">›</div>
+</div>
+
+<div class="tg-btn" onclick="openSupport()">
+  <div class="tg-left">
+    <div class="tg-icon">
+      <svg viewBox="0 0 24 24"><path d="M9.04 15.44 8.7 19.9c.48 0 .69-.21.94-.45l2.26-2.16 4.68 3.42c.86.48 1.48.23 1.7-.8l3.08-14.42c.28-1.31-.47-1.83-1.3-1.52L1.35 9.56c-1.28.5-1.26 1.21-.22 1.53l4.6 1.44z"/></svg>
+    </div>
+    Telegram Support
+  </div>
+  <div class="tg-arrow">›</div>
+</div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+let tg = window.Telegram?.WebApp || null;
+if(tg){ tg.ready(); }
+
+let u = tg?.initDataUnsafe?.user || {};
+
+fullname.innerText = u.first_name || "User";
+tgUsername.innerText = u.username ? "@" + u.username : "";
+avatar.innerHTML = u.photo_url
+  ? `<img src="${u.photo_url}">`
+  : (fullname.innerText[0] || "U");
+
+reflink.innerText =
+  `https://t.me/Realtakaincamebot?start=ref_${u.id || 0}`;
+
+function copyLink(){
+  navigator.clipboard.writeText(reflink.innerText);
+  tg && tg.showAlert("Copied!");
+}
+
+function shareLink(){
+  let url = "https://t.me/share/url?url=" + reflink.innerText;
+  tg ? tg.openTelegramLink(url) : window.open(url);
+}
+
+function joinTelegram(){
+  let url = "https://t.me/TakaIncomeCommunity";
+  tg ? tg.openTelegramLink(url) : window.open(url);
+}
+
+function openSupport(){
+  let url = "https://t.me/TakaIncomeCommunity?direct";
+  tg ? tg.openTelegramLink(url) : window.open(url);
+}
+</script>
+
+</body>
+                                 </html>
