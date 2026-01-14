@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💰 Taka ইনকাম Web App</title>
-
+  <title> 💰Taka ইনকাম Web App</title>
   <style>
     body {
       margin: 0;
@@ -16,19 +15,21 @@
       height: 100vh;
     }
 
+    /* সব পেজ সাদা */
     main {
       flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding-bottom: 80px;
-      background-color: #fff;
-      color: #000;
-      width: 100%;
-      height: 100%;
-    }
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
 
-    iframe {
+      background-color: #fff; /* সাদা করা হয়েছে */
+      color: #000; /* লেখার রঙ কালো */
       width: 100%;
       height: 100%;
-      border: none;
     }
 
     nav {
@@ -48,6 +49,7 @@
       align-items: center;
       color: #aaa;
       cursor: pointer;
+      transition: color 0.2s;
     }
 
     nav div.active {
@@ -60,76 +62,52 @@
       margin-bottom: 4px;
     }
 
-    nav span {
+    nav div span {
       font-size: 14px;
       font-weight: bold;
     }
+
   </style>
 </head>
-
 <body>
 
-  <!-- MAIN CONTENT -->
   <main id="main-content">
-    <!-- Default: Home iframe -->
-    <iframe src="https://taka-income-bot-home-section-vwze.vercel.app/"></iframe>
+    Home Section
   </main>
 
-  <!-- BOTTOM NAV -->
   <nav>
-
-    <div class="active" data-section="home">
-      <img src="https://i.postimg.cc/T248v1HN/Screenshot-20250619-232311-1-1-1-1-1.png">
+    <div class="active">
+      <img src="https://i.postimg.cc/T248v1HN/Screenshot-20250619-232311-1-1-1-1-1.png" alt="Home" />
       <span>Home</span>
     </div>
 
-    <div data-section="support">
-      <span style="font-size:32px;">🎧</span>
+    <div>
+      <span style="font-size: 32px; margin-bottom: 4px;">🎧</span>
       <span>Support</span>
     </div>
 
-    <div data-section="earn">
-      <img src="https://i.postimg.cc/xCmsrjkh/Screenshot-20250619-232311-1-1-1.png">
+    <div>
+      <img src="https://i.postimg.cc/xCmsrjkh/Screenshot-20250619-232311-1-1-1.png" alt="Earn" />
       <span>Earn</span>
     </div>
-
-    <div data-section="withdraw">
-      <img src="https://i.postimg.cc/CLwV4XXS/Screenshot-20250619-232332-1-1.png">
+    <div>
+      <img src="https://i.postimg.cc/CLwV4XXS/Screenshot-20250619-232332-1-1.png" alt="Withdraw" />
       <span>Withdraw</span>
     </div>
-
   </nav>
 
   <script>
     const navItems = document.querySelectorAll("nav div");
     const mainContent = document.getElementById("main-content");
 
-    navItems.forEach(item => {
+    navItems.forEach((item) => {
       item.addEventListener("click", () => {
 
         navItems.forEach(i => i.classList.remove("active"));
         item.classList.add("active");
 
-        const section = item.dataset.section;
-
-        if(section === "home"){
-          mainContent.innerHTML = `
-            <iframe src="https://taka-income-bot-home-section-vwze.vercel.app/"></iframe>
-          `;
-        } else {
-          mainContent.innerHTML = `
-            <div style="
-              display:flex;
-              justify-content:center;
-              align-items:center;
-              height:100%;
-              font-size:28px;
-              font-weight:bold;
-            ">
-              ${section.charAt(0).toUpperCase() + section.slice(1)} Section
-            </div>
-          `;
-        }
+        const section = item.innerText.trim();
+        mainContent.innerHTML = section + " Section";
       });
     });
   </script>
