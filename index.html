@@ -1,116 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> 💰Taka ইনকাম Web App</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: #000;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💰 Taka ইনকাম Web App</title>
 
-    /* সব পেজ সাদা */
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-bottom: 80px;
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #000;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-      background-color: #fff; /* সাদা করা হয়েছে */
-      color: #000; /* লেখার রঙ কালো */
-      width: 100%;
-      height: 100%;
-    }
+main {
+  flex: 1;
+  background: #fff;
+}
 
-    nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      background-color: #111;
-      padding: 10px 0;
-      border-top: 1px solid #333;
-    }
+/* iframe */
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
-    nav div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #aaa;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
+/* Bottom Nav */
+nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: #111;
+  padding: 10px 0 6px;
+  border-top: 1px solid #333;
+}
 
-    nav div.active {
-      color: white;
-    }
+/* Nav Item */
+.nav-item {
+  color: #aaa;
+  text-align: center;
+  cursor: pointer;
+  min-width: 70px;
+}
 
-    nav img {
-      width: 42px;
-      height: 42px;
-      margin-bottom: 4px;
-    }
+/* Active */
+.nav-item.active {
+  color: #fff;
+}
 
-    nav div span {
-      font-size: 14px;
-      font-weight: bold;
-    }
+/* Icon Container (সব icon same height) */
+.icon {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
 
-  </style>
+/* Icon Image */
+.icon img {
+  width: 42px;
+  height: 42px;
+}
+
+/* Text */
+.nav-item div:last-child {
+  font-size: 16px;
+  font-weight: bold;
+}
+</style>
 </head>
+
 <body>
 
-  <main id="main-content">
-    Home Section
-  </main>
+<main>
+  <iframe id="frame" src="home.html"></iframe>
+</main>
 
-  <nav>
-    <div class="active">
-      <img src="https://i.postimg.cc/T248v1HN/Screenshot-20250619-232311-1-1-1-1-1.png" alt="Home" />
-      <span>Home</span>
+<nav>
+
+  <!-- Home -->
+  <div class="nav-item active" onclick="loadPage('home.html', this)">
+    <div class="icon">
+      <img src="https://i.postimg.cc/T248v1HN/Screenshot-20250619-232311-1-1-1-1-1.png">
     </div>
+    <div>Home</div>
+  </div>
 
-    <div>
-      <span style="font-size: 32px; margin-bottom: 4px;">🎧</span>
-      <span>Support</span>
+  <!-- Support -->
+  <div class="nav-item" onclick="loadPage('support.html', this)">
+    <div class="icon" style="font-size:30px;">🎧</div>
+    <div>Support</div>
+  </div>
+
+  <!-- Earn -->
+  <div class="nav-item" onclick="loadPage('earn.html', this)">
+    <div class="icon">
+      <img src="https://i.postimg.cc/xCmsrjkh/Screenshot-20250619-232311-1-1-1.png">
     </div>
+    <div>Earn</div>
+  </div>
 
-    <div>
-      <img src="https://i.postimg.cc/xCmsrjkh/Screenshot-20250619-232311-1-1-1.png" alt="Earn" />
-      <span>Earn</span>
+  <!-- Withdraw -->
+  <div class="nav-item" onclick="loadPage('withdraw.html', this)">
+    <div class="icon">
+      <img src="https://i.postimg.cc/CLwV4XXS/Screenshot-20250619-232332-1-1.png">
     </div>
-    <div>
-      <img src="https://i.postimg.cc/CLwV4XXS/Screenshot-20250619-232332-1-1.png" alt="Withdraw" />
-      <span>Withdraw</span>
-    </div>
-  </nav>
+    <div>Withdraw</div>
+  </div>
 
-  <script>
-    const navItems = document.querySelectorAll("nav div");
-    const mainContent = document.getElementById("main-content");
+</nav>
 
-    navItems.forEach((item) => {
-      item.addEventListener("click", () => {
+<script>
+function loadPage(page, el) {
+  document.getElementById("frame").src = page;
 
-        navItems.forEach(i => i.classList.remove("active"));
-        item.classList.add("active");
+  document.querySelectorAll(".nav-item")
+    .forEach(item => item.classList.remove("active"));
 
-        const section = item.innerText.trim();
-        mainContent.innerHTML = section + " Section";
-      });
-    });
-  </script>
+  el.classList.add("active");
+}
+</script>
 
 </body>
 </html>
