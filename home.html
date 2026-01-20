@@ -216,12 +216,13 @@ const tg = window.Telegram?.WebApp;
 if (tg) {
   tg.ready();
   tg.expand();
-}
-
+  }
 const fullname   = document.getElementById("fullname");
 const tgUsername = document.getElementById("tgUsername");
 const avatar     = document.getElementById("avatar");
 const reflink    = document.getElementById("reflink");
+
+console.log(tg?.initDataUnsafe);
 
 let u = tg?.initDataUnsafe?.user || {};
 
@@ -256,4 +257,3 @@ function openSupport(){
 </script>
 
 </body>
-</html>
