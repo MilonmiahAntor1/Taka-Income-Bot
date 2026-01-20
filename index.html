@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💰 Taka ইনকাম Web App</title>
 
-<!-- Telegram WebApp -->
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 <style>
 body {
   margin: 0;
@@ -18,11 +15,16 @@ body {
   flex-direction: column;
 }
 
-/* Main content */
 main {
   flex: 1;
   background: #fff;
-  overflow-y: auto;
+}
+
+/* iframe */
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* Bottom Nav */
@@ -50,7 +52,7 @@ nav {
   color: #fff;
 }
 
-/* Icon */
+/* Icon Container (সব icon same height) */
 .icon {
   height: 50px;
   display: flex;
@@ -59,6 +61,7 @@ nav {
   margin-bottom: 4px;
 }
 
+/* Icon Image */
 .icon img {
   width: 42px;
   height: 42px;
@@ -74,12 +77,13 @@ nav {
 
 <body>
 
-<main id="content">
-  <!-- home.html content will load here -->
+<main>
+  <iframe id="frame" src="home.html"></iframe>
 </main>
 
 <nav>
 
+  <!-- Home -->
   <div class="nav-item active" onclick="loadPage('home.html', this)">
     <div class="icon">
       <img src="https://i.postimg.cc/T248v1HN/Screenshot-20250619-232311-1-1-1-1-1.png">
@@ -87,11 +91,13 @@ nav {
     <div>Home</div>
   </div>
 
+  <!-- Support -->
   <div class="nav-item" onclick="loadPage('support.html', this)">
     <div class="icon" style="font-size:30px;">🎧</div>
     <div>Support</div>
   </div>
 
+  <!-- Earn -->
   <div class="nav-item" onclick="loadPage('earn.html', this)">
     <div class="icon">
       <img src="https://i.postimg.cc/xCmsrjkh/Screenshot-20250619-232311-1-1-1.png">
@@ -99,6 +105,7 @@ nav {
     <div>Earn</div>
   </div>
 
+  <!-- Withdraw -->
   <div class="nav-item" onclick="loadPage('withdraw.html', this)">
     <div class="icon">
       <img src="https://i.postimg.cc/CLwV4XXS/Screenshot-20250619-232332-1-1.png">
@@ -109,25 +116,14 @@ nav {
 </nav>
 
 <script>
-const tg = window.Telegram.WebApp;
-tg.expand();
-
-/* Load page */
 function loadPage(page, el) {
-  fetch(page)
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("content").innerHTML = data;
-    });
+  document.getElementById("frame").src = page;
 
   document.querySelectorAll(".nav-item")
     .forEach(item => item.classList.remove("active"));
 
   el.classList.add("active");
 }
-
-/* Default load */
-loadPage('home.html', document.querySelector('.nav-item'));
 </script>
 
 </body>
